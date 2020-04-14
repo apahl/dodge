@@ -45,8 +45,8 @@ struct Ball {
   }
 
   mutating func updatePos() {
-    pos.x += sin(direction.angle.radians) * direction.speed
-    pos.y += cos(direction.angle.radians) * direction.speed
+    pos.x += sin(radians(from: direction.angle)) * direction.speed
+    pos.y += cos(radians(from: direction.angle)) * direction.speed
   }
 }
 
@@ -91,15 +91,15 @@ struct Player {
     var dist: Float
     if dX >= 0.0 {
       if dY >= 0.0 {
-        angle = atan(abs(dX / dY)).degrees
+        angle = degrees(from: atan(abs(dX / dY)))
       } else {
-        angle = 90.0 + atan(abs(dY / dX)).degrees
+        angle = 90.0 + degrees(from: atan(abs(dY / dX)))
       }
     } else {
       if dY < 0.0 {
-        angle = 180.0 + atan(abs(dX / dY)).degrees
+        angle = 180.0 + degrees(from: atan(abs(dX / dY)))
       } else {
-        angle = 270.0 + atan(abs(dY / dX)).degrees
+        angle = 270.0 + degrees(from: atan(abs(dY / dX)))
       }
     }
     dist = ((dX * dX) + (dY * dY)).squareRoot()
@@ -128,8 +128,8 @@ struct Player {
     }
     direction.speed = speed
 
-    pos.x += sin(direction.angle.radians) * direction.speed
-    pos.y += cos(direction.angle.radians) * direction.speed
+    pos.x += sin(radians(from: direction.angle)) * direction.speed
+    pos.y += cos(radians(from: direction.angle)) * direction.speed
     if (pos.x - playerRadius) <= 0 {
       pos.x = playerRadius
     } else if (pos.x + playerRadius) >= wsize.width {
