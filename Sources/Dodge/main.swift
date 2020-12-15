@@ -39,7 +39,7 @@ struct Ball {
     if angle < 0.0 {
       angle = 360.0 + angle
     } else if angle > 360.0 {
-      angle = angle - 360.0
+      angle -= 360.0
     }
     direction.angle = angle
   }
@@ -85,24 +85,24 @@ struct Player {
   func getMouseAngleDist() -> (Float, Float) {
     let mouseX = Float(GetMouseX())
     let mouseY = Float(GetMouseY())
-    let dX = (mouseX - pos.x)
-    let dY = (mouseY - pos.y)
+    let deltaX = (mouseX - pos.x)
+    let deltaY = (mouseY - pos.y)
     var angle: Float
     var dist: Float
-    if dX >= 0.0 {
-      if dY >= 0.0 {
-        angle = degrees(from: atan(abs(dX / dY)))
+    if deltaX >= 0.0 {
+      if deltaY >= 0.0 {
+        angle = degrees(from: atan(abs(deltaX / deltaY)))
       } else {
-        angle = 90.0 + degrees(from: atan(abs(dY / dX)))
+        angle = 90.0 + degrees(from: atan(abs(deltaY / deltaX)))
       }
     } else {
-      if dY < 0.0 {
-        angle = 180.0 + degrees(from: atan(abs(dX / dY)))
+      if deltaY < 0.0 {
+        angle = 180.0 + degrees(from: atan(abs(deltaX / deltaY)))
       } else {
-        angle = 270.0 + degrees(from: atan(abs(dY / dX)))
+        angle = 270.0 + degrees(from: atan(abs(deltaY / deltaX)))
       }
     }
-    dist = ((dX * dX) + (dY * dY)).squareRoot()
+    dist = ((deltaX * deltaX) + (deltaY * deltaY)).squareRoot()
     return (angle, dist)
   }
 
